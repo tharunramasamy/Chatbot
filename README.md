@@ -91,8 +91,4 @@ This chatbot is designed for internal BDR use only. Please ensure that proposal 
 
 ## **Contact**
 
-For questions, feedback, or contributions, please reach out to \[Your Email] or the OptiSol sales analytics team.
-
----
-
-If you want, I can help you tailor this with your **actual file names**, or even turn it into a polished PDF or Markdown version — just let me know!
+For questions, feedback, or contributions, please reach out to \ OptiSol sales 

@@ -148,7 +148,7 @@ Please provide specific, actionable insights that will help the sales team impro
 
         except Exception as e:
             logger.error(f"Error analyzing CRM data: {e}")
-            return f"⚠️ I encountered an error while analyzing the {data_type} data: {str(e)}"
+            return f" I encountered an error while analyzing the {data_type} data: {str(e)}"
 
     def _prepare_data_summary(self, data_type, data):
         """Prepare a structured summary of the CRM data"""

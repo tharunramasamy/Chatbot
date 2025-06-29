@@ -20,7 +20,6 @@ load_dotenv()
 # Page Configuration and Styling
 st.set_page_config(
     page_title="OptiSale.AI - Intelligent Sales Assistant",
-    page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -122,9 +121,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 USERS = {
-    "admin": {"password": "admin123", "role": "admin", "name": "Admin User"},
-    "Manoj R": {"password": "manoj123", "role": "owner", "name": "Manoj R"},
-    "demo": {"password": "demo123", "role": "user", "name": "Demo User"}
+    # Admin users (full access)
+    "admin": {"password": "admin123", "role": "admin", "name": "Admin User", "owner_name": None},
+    "demo": {"password": "demo123", "role": "admin", "name": "Demo User", "owner_name": None},
+    
+    # Owner users (restricted to own data)
+    "rajamurugavelu": {"password": "rajamurugavelu123", "role": "owner", "name": "Raja Murugavelu", "owner_name": "Raja Murugavelu"},
+    "kumaranv": {"password": "kumaranv123", "role": "owner", "name": "Kumaran V", "owner_name": "Kumaran V"},
+    "soniyam": {"password": "soniyam123", "role": "owner", "name": "Soniya M", "owner_name": "Soniya M"},
+    "dineshkumar": {"password": "dineshkumar123", "role": "owner", "name": "Dinesh Kumar", "owner_name": "Dinesh Kumar"},
+    "presales": {"password": "presales123", "role": "owner", "name": "Presales", "owner_name": "Presales"},
+    "vishnubhagavath": {"password": "vishnubhagavath123", "role": "owner", "name": "Vishnu Bhagavath", "owner_name": "Vishnu Bhagavath"},
+    "manojr": {"password": "manojr123", "role": "owner", "name": "Manoj R", "owner_name": "Manoj R"},
+    "praveenmuthumasaran": {"password": "praveenmuthumasaran123", "role": "owner", "name": "Praveen Muthumasaran", "owner_name": "Praveen Muthumasaran"},
+    "ramkumar": {"password": "ramkumar123", "role": "owner", "name": "Ram Kumar", "owner_name": "Ram Kumar"},
+    "harisharavindhan": {"password": "harisharavindhan123", "role": "owner", "name": "Harish Aravindhan", "owner_name": "Harish Aravindhan"}
 }
 
 def init_session_state():
@@ -164,8 +175,8 @@ def show_login():
         with st.container():
             st.markdown("### Secure Login")
             with st.form("login_form"):
-                username = st.text_input("👤 Username", placeholder="Enter your username")
-                password = st.text_input("🔑 Password", type="password", placeholder="Enter your password")
+                username = st.text_input(" Username", placeholder="Enter your username")
+                password = st.text_input(" Password", type="password", placeholder="Enter your password")
 
                 col_a, col_b = st.columns(2)
                 with col_a:
@@ -273,7 +284,7 @@ def enhanced_chat_interface():
                         <strong>You:</strong> {user_msg}
                     </div>
                     <div class="ai-message">
-                        <strong>🤖 OptiSale AI:</strong> {ai_msg}
+                        <strong> OptiSale AI:</strong> {ai_msg}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)

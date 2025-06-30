@@ -27,95 +27,48 @@ st.set_page_config(
 # Enhanced CSS styling
 st.markdown("""
 <style>
-    /* Main theme colors */
-    :root {
-        --primary-color: #1f77b4;
-        --secondary-color: #ff7f0e;
-        --success-color: #2ca02c;
-        --warning-color: #d62728;
-        --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    /* Custom styling for the app */
     .main-header {
-        background: var(--background-gradient);
-        padding: 2rem;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
         border-radius: 10px;
         color: white;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-
     .metric-card {
         background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-left: 4px solid var(--primary-color);
-        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 4px solid #667eea;
     }
-
     .chat-container {
         background: #f8f9fa;
-        border-radius: 10px;
         padding: 1rem;
+        border-radius: 10px;
         margin: 1rem 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
-
     .user-message {
-        background: var(--primary-color);
+        background: #667eea;
         color: white;
-        padding: 0.8rem 1.2rem;
-        border-radius: 18px 18px 4px 18px;
+        padding: 0.5rem 1rem;
+        border-radius: 15px;
         margin: 0.5rem 0;
-        margin-left: 20%;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: right;
     }
-
     .ai-message {
         background: white;
         color: #333;
-        padding: 0.8rem 1.2rem;
-        border-radius: 18px 18px 18px 4px;
-        margin: 0.5rem 0;
-        margin-right: 20%;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border-left: 3px solid var(--secondary-color);
-    }
-
-    .data-table {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .sidebar .stButton > button {
-        width: 100%;
-        background: var(--background-gradient);
-        color: white;
-        border: none;
-        border-radius: 8px;
         padding: 0.5rem 1rem;
-        font-weight: 600;
+        border-radius: 15px;
+        margin: 0.5rem 0;
+        border: 1px solid #e0e0e0;
     }
-
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-    }
-
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        background-color: #f0f2f6;
-        border-radius: 8px 8px 0 0;
-        padding: 0 20px;
-    }
-
-    .stTabs [aria-selected="true"] {
-        background: var(--background-gradient);
-        color: white;
+    .owner-filter {
+        background: #e3f2fd;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -126,16 +79,16 @@ USERS = {
     "demo": {"password": "demo123", "role": "admin", "name": "Demo User", "owner_name": None},
     
     # Owner users (restricted to own data)
-    "rajamurugavelu": {"password": "rajamurugavelu123", "role": "owner", "name": "Raja Murugavelu", "owner_name": "Raja Murugavelu"},
-    "kumaranv": {"password": "kumaranv123", "role": "owner", "name": "Kumaran V", "owner_name": "Kumaran V"},
-    "soniyam": {"password": "soniyam123", "role": "owner", "name": "Soniya M", "owner_name": "Soniya M"},
-    "dineshkumar": {"password": "dineshkumar123", "role": "owner", "name": "Dinesh Kumar", "owner_name": "Dinesh Kumar"},
-    "presales": {"password": "presales123", "role": "owner", "name": "Presales", "owner_name": "Presales"},
-    "vishnubhagavath": {"password": "vishnubhagavath123", "role": "owner", "name": "Vishnu Bhagavath", "owner_name": "Vishnu Bhagavath"},
-    "manojr": {"password": "manojr123", "role": "owner", "name": "Manoj R", "owner_name": "Manoj R"},
-    "praveenmuthumasaran": {"password": "praveenmuthumasaran123", "role": "owner", "name": "Praveen Muthumasaran", "owner_name": "Praveen Muthumasaran"},
-    "ramkumar": {"password": "ramkumar123", "role": "owner", "name": "Ram Kumar", "owner_name": "Ram Kumar"},
-    "harisharavindhan": {"password": "harisharavindhan123", "role": "owner", "name": "Harish Aravindhan", "owner_name": "Harish Aravindhan"}
+    "RajaMurugavelu": {"password": "rajamurugavelu123", "role": "owner", "name": "Raja Murugavelu", "owner_name": "Raja Murugavelu"},
+    "KumaranV": {"password": "kumaranv123", "role": "owner", "name": "Kumaran V", "owner_name": "Kumaran V"},
+    "SoniyaM": {"password": "soniyam123", "role": "owner", "name": "Soniya M", "owner_name": "Soniya M"},
+    "DineshKumar": {"password": "dineshkumar123", "role": "owner", "name": "Dinesh Kumar", "owner_name": "Dinesh Kumar"},
+    "Presales": {"password": "presales123", "role": "owner", "name": "Presales", "owner_name": "Presales"},
+    "VishnuBhagavath": {"password": "vishnubhagavath123", "role": "owner", "name": "Vishnu Bhagavath", "owner_name": "Vishnu Bhagavath"},
+    "ManojR": {"password": "manojr123", "role": "owner", "name": "Manoj R", "owner_name": "Manoj R"},
+    "PraveenMuthumaaran": {"password": "praveenmuthumasaran123", "role": "owner", "name": "Praveen Muthumasaran", "owner_name": "Praveen Muthumasaran"},
+    "RamKumar": {"password": "ramkumar123", "role": "owner", "name": "Ram Kumar", "owner_name": "Ram Kumar"},
+    "HarishAravindhan": {"password": "harisharavindhan123", "role": "owner", "name": "Harish Aravindhan", "owner_name": "Harish Aravindhan"}
 }
 
 def init_session_state():
@@ -146,6 +99,7 @@ def init_session_state():
         "chat_history": [],
         "selected_owner": "All"
     }
+    
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
@@ -164,309 +118,325 @@ def show_login():
     """Enhanced login form"""
     st.markdown("""
     <div class="main-header">
-        <h1>OptiSale.AI</h1>
-        <h3>Intelligent Sales Assistant</h3>
+        <h1>🚀 OptiSale.AI</h1>
         <p>Your AI-powered CRM companion for smarter sales insights</p>
     </div>
     """, unsafe_allow_html=True)
-
+    
     col1, col2, col3 = st.columns([1, 2, 1])
+    
     with col2:
-        with st.container():
-            st.markdown("### Secure Login")
-            with st.form("login_form"):
-                username = st.text_input(" Username", placeholder="Enter your username")
-                password = st.text_input(" Password", type="password", placeholder="Enter your password")
+        st.markdown("### 🔐 Login to Your Dashboard")
+        
+        with st.form("login_form"):
+            username = st.text_input("Username", placeholder="Enter your username")
+            password = st.text_input("Password", type="password", placeholder="Enter your password")
+            login_button = st.form_submit_button("Login", use_container_width=True)
+            
+            if login_button:
+                if username in USERS and USERS[username]["password"] == password:
+                    st.session_state.authenticated = True
+                    st.session_state.user = username
+                    st.success(f"Welcome, {USERS[username]['name']}!")
+                    st.rerun()
+                else:
+                    st.error("Invalid username or password")
+        
+        st.markdown("---")
+        st.info("💡 **Demo Credentials:**\n- Username: demo\n- Password: demo123")
 
-                col_a, col_b = st.columns(2)
-                with col_a:
-                    if st.form_submit_button("Login", use_container_width=True):
-                        if username in USERS and USERS[username]["password"] == password:
-                            st.session_state.authenticated = True
-                            st.session_state.user = USERS[username]
-                            st.success("Login successful!")
-                            st.rerun()
-                        else:
-                            st.error("Invalid credentials")
+def filter_data_by_ownership(data, user_info):
+    """Filter data based on user role and ownership"""
+    if not data or "Error" in str(data):
+        return data
+    
+    # Admin users see all data
+    if user_info["role"] == "admin":
+        return data
+    
+    # Owner users see only their own data
+    owner_name = user_info["owner_name"]
+    if not owner_name:
+        return {"No Data": []}
+    
+    # Filter data to show only records owned by the current user
+    filtered_data = {}
+    if isinstance(data, dict):
+        for owner, records in data.items():
+            if owner == owner_name:
+                filtered_data[owner] = records
+    
+    return filtered_data if filtered_data else {"No Data": []}
 
-                with col_b:
-                    st.form_submit_button("Demo Info", use_container_width=True)
+def get_user_specific_data():
+    """Get data filtered by current user's ownership"""
+    user_info = USERS[st.session_state.user]
+    
+    # Fetch all data
+    deals_data = get_deals()
+    leads_data = get_leads()
+    tasks_data = get_tasks()
+    
+    # Filter based on user role
+    filtered_deals = filter_data_by_ownership(deals_data, user_info)
+    filtered_leads = filter_data_by_ownership(leads_data, user_info)
+    filtered_tasks = filter_data_by_ownership(tasks_data, user_info)
+    
+    return filtered_deals, filtered_leads, filtered_tasks
 
-            with st.expander("Demo Credentials"):
-                st.code("Username: demo\nPassword: demo123")
-
-def create_metric_card(title, value, delta=None, delta_color="normal"):
-    """Create a styled metric card"""
-    delta_html = ""
-    if delta:
-        color = "green" if delta_color == "normal" else "red"
-        delta_html = f'<div style="color: {color}; font-size: 0.8rem;">△ {delta}</div>'
-
-    return f"""
-    <div class="metric-card">
-        <h4 style="margin: 0; color: var(--primary-color);">{title}</h4>
-        <h2 style="margin: 0.5rem 0; color: #333;">{value}</h2>
-        {delta_html}
-    </div>
-    """
-
-def display_data_table(data, title, key_prefix):
-    """Display data in an enhanced table format"""
-    if not data or "Error" in data:
-        st.warning(f"No {title.lower()} data available or error occurred")
-        return
-
-    st.markdown(f"{title} Overview")
-
-    # Owner selection filter
-    owners = list(data.keys())
-    selected_owner = st.selectbox(f"Filter by Owner ({title})", ["All"] + owners, key=f"{key_prefix}_owner")
-
-    # Display data based on selection
-    if selected_owner == "All":
-        for owner, items in data.items():
-            if items:  # Only show if there are items
-                with st.expander(f"👤 {owner} ({len(items)} {title.lower()})"):
-                    df = pd.DataFrame(items)
-                    st.dataframe(df, use_container_width=True)
-    else:
-        if selected_owner in data and data[selected_owner]:
-            st.markdown(f"#### 👤 {selected_owner}")
-            df = pd.DataFrame(data[selected_owner])
-            st.dataframe(df, use_container_width=True)
-
-            # Download option
-            csv = df.to_csv(index=False)
-            st.download_button(
-                label=f"Download {title} Data",
-                data=csv,
-                file_name=f"{title.lower()}_{selected_owner.replace(' ', '_')}.csv",
-                mime="text/csv"
-            )
-        else:
-            st.info(f"No {title.lower()} found for {selected_owner}")
-
-def create_owner_distribution_chart(data, title):
-    """Create a pie chart showing distribution by owner"""
-    if not data or "Error" in data:
-        return None
-
-    owner_counts = {owner: len(items) for owner, items in data.items()}
-
-    if owner_counts:
-        fig = px.pie(
-            values=list(owner_counts.values()),
-            names=list(owner_counts.keys()),
-            title=f"{title} Distribution by Owner"
-        )
-        fig.update_traces(textposition='inside', textinfo='percent+label')
-        return fig
-    return None
-
-def enhanced_chat_interface():
-    """Enhanced chatbot interface with better styling"""
-    st.markdown("""
+def show_dashboard():
+    """Enhanced dashboard with ownership filtering"""
+    user_info = USERS[st.session_state.user]
+    
+    st.markdown(f"""
     <div class="main-header">
-        <h2>AI Sales Assistant</h2>
+        <h1>🚀 OptiSale.AI Dashboard</h1>
         <p>Get intelligent insights about your CRM data</p>
     </div>
     """, unsafe_allow_html=True)
-
-    # Chat history display
-    chat_container = st.container()
-
-    with chat_container:
-        if st.session_state.chat_history:
-            for i, (user_msg, ai_msg) in enumerate(st.session_state.chat_history):
-                st.markdown(f"""
-                <div class="chat-container">
-                    <div class="user-message">
-                        <strong>You:</strong> {user_msg}
-                    </div>
-                    <div class="ai-message">
-                        <strong> OptiSale AI:</strong> {ai_msg}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-        else:
-            st.markdown("""
-            <div class="chat-container">
-                <div class="ai-message">
-                    <strong>OptiSale AI:</strong> Hello! I'm your intelligent sales assistant. 
-                    I can help you analyze your CRM data, provide insights about deals, leads, and tasks. 
-                    What would you like to know?
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-    # Chat input
-    st.markdown("Ask me anything about your sales data:")
-
-    col1, col2 = st.columns([4, 1])
-    with col1:
-        user_input = st.text_input("", placeholder="E.g., 'Show me lead conversion insights' or 'What deals need attention?'", key="chat_input")
-    with col2:
-        send_button = st.button("📤 Send", use_container_width=True)
-
-    # Quick action buttons
-    st.markdown("####  Quick Actions:")
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        if st.button("Analyze Deals", use_container_width=True):
-            user_input = "Analyze my deals data and provide insights"
-            send_button = True
-
-    with col2:
-        if st.button("Lead Insights", use_container_width=True):
-            user_input = "Give me insights about leads performance"
-            send_button = True
-
-    with col3:
-        if st.button("Task Analysis", use_container_width=True):
-            user_input = "Analyze my tasks and priorities"
-            send_button = True
-
-    with col4:
-        if st.button("Sales Tips", use_container_width=True):
-            user_input = "Give me sales strategy recommendations"
-            send_button = True
-
-    # Process chat input
-    if send_button and user_input:
-        with st.spinner("Thinking..."):
-            # Get relevant CRM data based on query
-            context = ""
-            if any(word in user_input.lower() for word in ["deal", "deals"]):
-                deals = get_deals()
-                context += f"Deals data: {str(deals)[:500]}..."
-
-            if any(word in user_input.lower() for word in ["lead", "leads"]):
-                leads = get_leads()
-                context += f"Leads data: {str(leads)[:500]}..."
-
-            if any(word in user_input.lower() for word in ["task", "tasks"]):
-                tasks = get_tasks()
-                context += f"Tasks data: {str(tasks)[:500]}..."
-
-            # Get AI response
-            ai_response = chat_with_ai(user_input, context)
-
-            # Add to chat history
-            st.session_state.chat_history.append((user_input, ai_response))
-            st.rerun()
-
-def main_interface():
-    """Enhanced main application interface"""
-    # Sidebar
-    st.sidebar.markdown("""
-    <div style="text-align: center; padding: 1rem;">
-        <h2> OptiSale.AI</h2>
-        <p>Welcome, <strong>{}</strong>!</p>
+    
+    st.markdown(f"""
+    <div class="owner-filter">
+        <h3>Welcome, <strong>{user_info['name']}</strong>!</h3>
+        <p><strong>Role:</strong> {user_info['role'].title()}</p>
+        {f"<p><strong>Viewing data for:</strong> {user_info['owner_name']}</p>" if user_info['role'] == 'owner' else "<p><strong>Access Level:</strong> All Data (Admin)</p>"}
     </div>
-    """.format(st.session_state.user['name']), unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    st.sidebar.markdown("---")
-
-    if st.sidebar.button("Refresh Data", use_container_width=True):
-        st.cache_data.clear()
-        st.rerun()
-
-    if st.sidebar.button("New Chat", key="new_chat", use_container_width=True):
-        st.session_state.chat_history = []
-        st.rerun()
-
-    show_logout()
-
-    # Main content with enhanced tabs
-    tab2, tab1 = st.tabs(["AI Assistant", "Dashboard"])
-
-    # Dashboard Tab
-    with tab1:
-        st.markdown("""
-        <div class="main-header">
-            <h1>Sales Dashboard</h1>
-            <p>Comprehensive overview of your CRM performance</p>
+    # Get filtered data
+    deals_data, leads_data, tasks_data = get_user_specific_data()
+    
+    # Summary Statistics
+    st.markdown("## 📊 Performance Overview")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        total_deals = sum(len(records) for records in deals_data.values()) if deals_data else 0
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>🤝 Total Deals</h3>
+            <h2 style="color: #667eea;">{total_deals}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        total_leads = sum(len(records) for records in leads_data.values()) if leads_data else 0
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>👥 Total Leads</h3>
+            <h2 style="color: #667eea;">{total_leads}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        total_tasks = sum(len(records) for records in tasks_data.values()) if tasks_data else 0
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>✅ Total Tasks</h3>
+            <h2 style="color: #667eea;">{total_tasks}</h2>
         </div>
         """, unsafe_allow_html=True)
 
-        # Load data with caching
-        @st.cache_data(ttl=300)  # Cache for 5 minutes
-        def load_crm_data():
-            return {
-                'deals': get_deals(),
-                'leads': get_leads(), 
-                'tasks': get_tasks(),
-                'stats': get_summary_stats()
-            }
-
-        with st.spinner("Loading CRM data..."):
-            crm_data = load_crm_data()
-
-        # Metrics row
-        col1, col2, col3, col4 = st.columns(4)
-
-        with col1:
-            deals_count = crm_data['stats'].get('total_deals', 0)
-            st.markdown(create_metric_card(" Total Deals", deals_count), unsafe_allow_html=True)
-
-        with col2:
-            leads_count = crm_data['stats'].get('total_leads', 0)
-            st.markdown(create_metric_card(" Total Leads", leads_count), unsafe_allow_html=True)
-
-        with col3:
-            tasks_count = crm_data['stats'].get('total_tasks', 0)
-            st.markdown(create_metric_card(" Total Tasks", tasks_count), unsafe_allow_html=True)
-
-        with col4:
-            total_owners = len(set(
-                list(crm_data['stats'].get('deals_by_owner', {}).keys()) +
-                list(crm_data['stats'].get('leads_by_owner', {}).keys()) +
-                list(crm_data['stats'].get('tasks_by_owner', {}).keys())
-            ))
-            st.markdown(create_metric_card(" Active Owners", total_owners), unsafe_allow_html=True)
-
-        # Charts row
-        if crm_data['deals'] and "Error" not in crm_data['deals']:
-            col1, col2 = st.columns(2)
-
-            with col1:
-                deals_chart = create_owner_distribution_chart(crm_data['deals'], "Deals")
-                if deals_chart:
-                    st.plotly_chart(deals_chart, use_container_width=True)
-
-            with col2:
-                leads_chart = create_owner_distribution_chart(crm_data['leads'], "Leads")
-                if leads_chart:
-                    st.plotly_chart(leads_chart, use_container_width=True)
-
-        # Data tables
-        st.markdown("---")
-
-        # Enhanced data display
-        data_tab1, data_tab2, data_tab3 = st.tabs([" Deals", " Leads", " Tasks"])
-
-        with data_tab1:
-            display_data_table(crm_data['deals'], "Deals", "deals")
-
-        with data_tab2:
-            display_data_table(crm_data['leads'], "Leads", "leads")
-
-        with data_tab3:
-            display_data_table(crm_data['tasks'], "Tasks", "tasks")
-
-    # AI Assistant Tab
+    # Tabs for different data views
+    tab1, tab2, tab3, tab4 = st.tabs(["💼 Deals", "👥 Leads", "✅ Tasks", "🤖 AI Assistant"])
+    
+    with tab1:
+        show_deals_section(deals_data)
+    
     with tab2:
-        enhanced_chat_interface()
+        show_leads_section(leads_data)
+    
+    with tab3:
+        show_tasks_section(tasks_data)
+    
+    with tab4:
+        show_ai_chat_section(deals_data, leads_data, tasks_data)
+
+def show_deals_section(deals_data):
+    """Display deals data with filtering"""
+    st.markdown("### 💼 Your Deals")
+    
+    if not deals_data or "Error" in str(deals_data):
+        st.warning("No deals data available or error fetching data.")
+        return
+    
+    if "No Data" in deals_data:
+        st.info("No deals assigned to you.")
+        return
+    
+    for owner, deals in deals_data.items():
+        if deals:
+            st.markdown(f"#### 👤 {owner} ({len(deals)} deals)")
+            
+            deals_df = pd.DataFrame(deals)
+            st.dataframe(deals_df, use_container_width=True)
+            
+            # Export option
+            csv = deals_df.to_csv(index=False)
+            st.download_button(
+                label=f"📥 Download {owner}'s Deals",
+                data=csv,
+                file_name=f"{owner}_deals.csv",
+                mime="text/csv"
+            )
+
+def show_leads_section(leads_data):
+    """Display leads data with filtering"""
+    st.markdown("### 👥 Your Leads")
+    
+    if not leads_data or "Error" in str(leads_data):
+        st.warning("No leads data available or error fetching data.")
+        return
+    
+    if "No Data" in leads_data:
+        st.info("No leads assigned to you.")
+        return
+    
+    for owner, leads in leads_data.items():
+        if leads:
+            st.markdown(f"#### 👤 {owner} ({len(leads)} leads)")
+            
+            leads_df = pd.DataFrame(leads)
+            st.dataframe(leads_df, use_container_width=True)
+            
+            # Export option
+            csv = leads_df.to_csv(index=False)
+            st.download_button(
+                label=f"📥 Download {owner}'s Leads",
+                data=csv,
+                file_name=f"{owner}_leads.csv",
+                mime="text/csv"
+            )
+
+def show_tasks_section(tasks_data):
+    """Display tasks data with filtering"""
+    st.markdown("### ✅ Your Tasks")
+    
+    if not tasks_data or "Error" in str(tasks_data):
+        st.warning("No tasks data available or error fetching data.")
+        return
+    
+    if "No Data" in tasks_data:
+        st.info("No tasks assigned to you.")
+        return
+    
+    for owner, tasks in tasks_data.items():
+        if tasks:
+            st.markdown(f"#### 👤 {owner} ({len(tasks)} tasks)")
+            
+            tasks_df = pd.DataFrame(tasks)
+            st.dataframe(tasks_df, use_container_width=True)
+            
+            # Export option
+            csv = tasks_df.to_csv(index=False)
+            st.download_button(
+                label=f"📥 Download {owner}'s Tasks",
+                data=csv,
+                file_name=f"{owner}_tasks.csv",
+                mime="text/csv"
+            )
+
+def show_ai_chat_section(deals_data, leads_data, tasks_data):
+    """Enhanced AI Chat Assistant with user-specific data"""
+    user_info = USERS[st.session_state.user]
+    
+    st.markdown("### 🤖 AI Sales Assistant")
+    st.markdown(f"**AI insights for:** {user_info['name']} ({user_info['role'].title()})")
+    
+    # Chat History Display
+    st.markdown("#### 💬 Chat History")
+    chat_container = st.container()
+    
+    with chat_container:
+        for message in st.session_state.chat_history:
+            if message["role"] == "user":
+                st.markdown(f'<div class="user-message">👤 {message["content"]}</div>', unsafe_allow_html=True)
+            else:
+                st.markdown(f'<div class="ai-message">🤖 {message["content"]}</div>', unsafe_allow_html=True)
+    
+    # Chat Input
+    st.markdown("#### 💭 Ask Your AI Assistant")
+    
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        user_input = st.text_input(
+            "Ask about your deals, leads, or tasks:",
+            placeholder="e.g., 'What deals should I focus on today?' or 'Analyze my lead conversion rate'"
+        )
+    
+    with col2:
+        send_button = st.button("Send 🚀", use_container_width=True)
+    
+    # Quick Action Buttons
+    st.markdown("#### ⚡ Quick Actions")
+    quick_actions = st.columns(4)
+    
+    with quick_actions[0]:
+        if st.button("📈 Analyze My Deals"):
+            user_input = "Analyze my deals and provide insights on what I should focus on"
+            send_button = True
+    
+    with quick_actions[1]:
+        if st.button("🎯 Lead Opportunities"):
+            user_input = "What are my best lead opportunities right now?"
+            send_button = True
+    
+    with quick_actions[2]:
+        if st.button("⏰ Urgent Tasks"):
+            user_input = "What urgent tasks do I need to complete?"
+            send_button = True
+    
+    with quick_actions[3]:
+        if st.button("💡 Sales Tips"):
+            user_input = "Give me actionable sales tips based on my current pipeline"
+            send_button = True
+    
+    # Process chat input
+    if send_button and user_input:
+        # Add user message to history
+        st.session_state.chat_history.append({"role": "user", "content": user_input})
+        
+        # Generate AI response based on user's filtered data only
+        with st.spinner("🤖 AI is analyzing your data..."):
+            try:
+                # Create context from user's filtered data
+                context_data = {
+                    "deals": deals_data,
+                    "leads": leads_data, 
+                    "tasks": tasks_data,
+                    "user_name": user_info['name'],
+                    "user_role": user_info['role']
+                }
+                
+                # Get AI response with user-specific context
+                ai_response = analyze_crm_data("comprehensive", context_data, user_input)
+                
+                # Add AI response to history
+                st.session_state.chat_history.append({"role": "assistant", "content": ai_response})
+                
+                st.rerun()
+                
+            except Exception as e:
+                error_msg = f"Sorry, I encountered an error: {str(e)}"
+                st.session_state.chat_history.append({"role": "assistant", "content": error_msg})
+                st.rerun()
+    
+    # Clear chat button
+    if st.button("🗑️ Clear Chat History"):
+        st.session_state.chat_history = []
+        st.rerun()
 
 def main():
-    """Main application entry point"""
+    """Main application function"""
     init_session_state()
-
+    
     if not st.session_state.authenticated:
         show_login()
     else:
-        main_interface()
+        show_logout()
+        show_dashboard()
 
 if __name__ == "__main__":
     main()

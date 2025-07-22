@@ -91,7 +91,6 @@ USERS = {
 # Page configuration
 st.set_page_config(
     page_title="CRM AI Dashboard",
-    page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -156,7 +155,7 @@ def show_login():
     st.markdown("""
     <div class="main-header">
         <h1 style="color: white; text-align: center; margin: 0;">
-            🤖 CRM AI Dashboard
+            CRM AI Dashboard
         </h1>
         <p style="color: white; text-align: center; margin: 0;">
             Please sign in to access your CRM dashboard
@@ -171,7 +170,7 @@ def show_login():
             st.markdown('<div class="login-container">', unsafe_allow_html=True)
             
             with st.form("login_form"):
-                st.markdown("### 🔐 Login")
+                st.markdown("Login")
                 username = st.text_input("Username", placeholder="Enter your username")
                 password = st.text_input("Password", type="password", placeholder="Enter your password")
                 
@@ -180,10 +179,10 @@ def show_login():
                     if user_info:
                         st.session_state.user_info = user_info
                         st.session_state.authenticated = True
-                        st.success("✅ Login successful!")
+                        st.success("Login successful!")
                         st.rerun()
                     else:
-                        st.error("❌ Invalid username or password")
+                        st.error("Invalid username or password")
             
             st.markdown('</div>', unsafe_allow_html=True)
             
@@ -206,7 +205,7 @@ def show_dashboard():
     # Header
     st.markdown(f"""
     <div class="main-header">
-        <h1 style="color: white; margin: 0;">🤖 CRM AI Dashboard</h1>
+        <h1 style="color: white; margin: 0;">CRM AI Dashboard</h1>
         <p style="color: white; margin: 0;">
             Welcome, {user_info.get('name', 'User')} | Role: {user_info.get('role', 'Unknown').title()}
         </p>
@@ -217,19 +216,19 @@ def show_dashboard():
     with st.sidebar:
         st.markdown(f"""
         <div class="sidebar-header">
-            <h3>👤 User Info</h3>
+            <h3>User Info</h3>
             <p><strong>Name:</strong> {user_info.get('name', 'Unknown')}</p>
             <p><strong>Role:</strong> {user_info.get('role', 'Unknown').title()}</p>
         </div>
         """, unsafe_allow_html=True)
         
         # Logout button
-        if st.button("🚪 Logout", use_container_width=True):
+        if st.button("Logout", use_container_width=True):
             st.session_state.clear()
             st.rerun()
         
         # CRM Connection Status
-        st.markdown("### 🔌 CRM Status")
+        st.markdown("CRM Status")
         try:
             connection_status, message = test_connection()
             if connection_status:
@@ -237,19 +236,19 @@ def show_dashboard():
             else:
                 st.error(message)
         except Exception as e:
-            st.error(f"❌ Connection error: {str(e)}")
+            st.error(f"Connection error: {str(e)}")
         
         # Refresh Data button
-        if st.button("🔄 Refresh Data", use_container_width=True):
+        if st.button("Refresh Data", use_container_width=True):
             st.cache_data.clear()
-            st.success("✅ Data refreshed!")
+            st.success("Data refreshed!")
             st.rerun()
         
         # Show AI status
         show_ai_status()
     
     # Main content tabs
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Dashboard", "👥 Leads", "💼 Deals", "📋 Tasks", "📝 Notes"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Dashboard", "Leads", "Deals", "Tasks", "Notes"])
     
     # Get CRM data
     owner_name = user_info.get('owner_name', 'All')
@@ -302,29 +301,31 @@ def show_dashboard_tab(crm_data, user_info):
     # KPI Cards
     col1, col2, col3, col4 = st.columns(4)
     
+    print("Summary Data:", summary) 
+
     with col1:
-        st.metric("📊 Total Leads", summary.get('total_leads', 0))
+        st.metric("Total Leads", summary.get('total_leads', 0))
     
     with col2:
-        st.metric("💼 Total Deals", summary.get('total_deals', 0))
+        st.metric("Total Deals", summary.get('total_deals', 0))
     
     with col3:
-        st.metric("📋 Total Tasks", summary.get('total_tasks', 0))
+        st.metric("Total Tasks", summary.get('total_tasks', 0))
     
     with col4:
-        st.metric("📝 Total Notes", summary.get('total_notes', 0))
+        st.metric("Total Notes", summary.get('total_notes', 0))
     
     # Deal Value Cards
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.metric("💰 Total Deal Value", f"${summary.get('total_deal_value', 0):,.2f}")
+        st.metric("Total Deal Value", f"${summary.get('total_deal_value', 0):,.2f}")
     
     with col2:
-        st.metric("✅ Closed Deals", summary.get('closed_deals', 0))
+        st.metric("Closed Deals", summary.get('closed_deals', 0))
     
     with col3:
-        st.metric("🏆 Closed Deal Value", f"${summary.get('closed_deal_value', 0):,.2f}")
+        st.metric("Closed Deal Value", f"${summary.get('closed_deal_value', 0):,.2f}")
     
     # Charts
     col1, col2 = st.columns(2)
@@ -362,7 +363,7 @@ def show_dashboard_tab(crm_data, user_info):
             st.plotly_chart(fig, use_container_width=True)
     
     # AI Chat Interface
-    st.markdown("### 🤖 AI Assistant")
+    st.markdown("AI Assistant")
     
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -393,7 +394,7 @@ def show_dashboard_tab(crm_data, user_info):
 
 def show_leads_tab(leads, user_info):
     """Display leads data"""
-    st.markdown("### 👥 Leads Management")
+    st.markdown("Leads Management")
     
     if not leads:
         st.info("No leads found for your account.")
@@ -435,7 +436,7 @@ def show_leads_tab(leads, user_info):
 
 def show_deals_tab(deals, user_info):
     """Display deals data"""
-    st.markdown("### 💼 Deals Management")
+    st.markdown("Deals Management")
     
     if not deals:
         st.info("No deals found for your account.")
@@ -477,7 +478,7 @@ def show_deals_tab(deals, user_info):
 
 def show_tasks_tab(tasks, user_info):
     """Display tasks data"""
-    st.markdown("### 📋 Tasks Management")
+    st.markdown("Tasks Management")
     
     if not tasks:
         st.info("No tasks found for your account.")
@@ -518,7 +519,7 @@ def show_tasks_tab(tasks, user_info):
 
 def show_notes_tab(notes, user_info):
     """Display notes data"""
-    st.markdown("### 📝 Notes Management")
+    st.markdown("Notes Management")
     
     if not notes:
         st.info("No notes found for your account.")
@@ -565,3 +566,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

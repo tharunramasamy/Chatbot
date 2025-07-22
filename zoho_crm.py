@@ -381,7 +381,6 @@ def get_crm_summary(owner_name="All"):
         total_deal_value = sum(deal.get('Amount', 0) for deal in deals if deal.get('Amount'))
         closed_deals = [deal for deal in deals if deal.get('Stage', '').lower() == 'closed won']
         closed_deal_value = sum(deal.get('Amount', 0) for deal in closed_deals if deal.get('Amount'))
-        
         return {
             "leads": leads,
             "deals": deals,
@@ -420,19 +419,19 @@ def test_connection():
     """Test API connection"""
     try:
         if not validate_config():
-            return False, "❌ Configuration missing"
+            return False, "Configuration missing"
         
         # Test with a simple leads request
         url = f"{BASE_URL}/Leads?per_page=1"
         response_data = make_api_request(url)
         
         if "Error" in response_data:
-            return False, f"❌ API connection failed: {response_data['Error']}"
+            return False, f"API connection failed: {response_data['Error']}"
         
-        return True, "✅ API connection successful"
+        return True, "API connection successful"
         
     except Exception as e:
-        return False, f"❌ Connection error: {str(e)}"
+        return False, f"Connection error: {str(e)}"
 
 # Additional utility functions
 def get_deals_by_stage(stage=None):

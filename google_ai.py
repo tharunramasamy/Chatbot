@@ -164,11 +164,11 @@ Instructions:
                 temperature=0
             )
             if "Connection successful" in response.choices[0].message.content:
-                return True, "✅ Connection successful"
-            return True, "✅ Connection established"
+                return True, "Connection successful"
+            return True, "Connection established"
         except Exception as e:
             logger.error(f"Connection test failed: {str(e)}")
-            return False, f"❌ Connection failed: {str(e)}"
+            return False, f"Connection failed: {str(e)}"
 
 
 # ------------------------------------------------------------------
@@ -186,16 +186,16 @@ def initialize_ai():
 def show_ai_status():
     ai = get_ai_client()
     with st.sidebar:
-        st.markdown("### ⚡ Groq AI Status")
+        st.markdown("Groq AI Status")
         if ai.client:
-            st.success("✅ AI Connected (Groq)")
+            st.success("AI Connected (Groq)")
             if st.button("Test AI Connection"):
                 with st.spinner("Testing connection..."):
                     success, message = ai.test_connection()
                     st.success(message) if success else st.error(message)
         else:
-            st.error("❌ AI Disconnected")
-            st.markdown("⚠️ Check your GROQ_API_KEY in environment variables")
+            st.error("AI Disconnected")
+            st.markdown(" Check your GROQ_API_KEY in environment variables")
 
 
 def get_ai_response(user_message: str, crm_data: dict, user_info: dict) -> str:

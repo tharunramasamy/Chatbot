@@ -32,7 +32,7 @@ This chatbot was developed to assist the Business Development Representatives (B
 Chatbot/
 │
 ├── app.py
-├── pitch_memeory.py
+├── google_ai.py
 ├── test.py
 ├── zoho_utiles.py 
 ├── data/

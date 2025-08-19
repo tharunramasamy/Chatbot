@@ -20,6 +20,7 @@ USERS = {
     "PraveenMuthumasaran": {"password": "praveenmuthumasaran123", "role": "owner", "name": "Praveen Muthumasaran", "owner_name": "Praveen Muthumasaran"},
     "RamKumar": {"password": "ramkumar123", "role": "owner", "name": "Ram Kumar", "owner_name": "Ram Kumar"},
     "HarishAravindhan": {"password": "harisharavindhan123", "role": "owner", "name": "Harish Aravindhan", "owner_name": "Harish Aravindhan"},
+    "SteffinaD": {"password": "steffinad123", "role": "owner", "name": "Steffina D", "owner_name": "Steffina D"}
 }
 
 st.set_page_config(page_title="OptiAI Dashboard", layout="wide", initial_sidebar_state="expanded")

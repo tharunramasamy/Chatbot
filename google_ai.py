@@ -1,36 +1,30 @@
-import os # This library is used for interacting with the operating system
-import streamlit as st # This library is used for building web applications
-from groq import Groq  # This library is used for interacting with Groq's AI services
-import logging # This library is used for logging messages
-import time # This library is used for adding delays in the code execution
+import os
+import streamlit as st
+from groq import Groq
+import logging
+import time
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class GoogleAI:
-    """Groq Generative AI integration for CRM chatbot (keeps original class name for compatibility)."""
+    """Groq Generative AI integration for CRM chatbot."""
 
     def __init__(self):
-        """Initialize Groq client"""
         self.client = None
-        # Default Groq model – ultra-fast 8B Llama
         self.model = "llama-3.1-8b-instant"
         self._initialize_client()
 
-    # ---------------------------------------------------------------------
-    # Internal helpers
-    # ---------------------------------------------------------------------
     def _initialize_client(self):
-        """Instantiate a Groq client from env variable GROQ_API_KEY"""
+        """Instantiate Groq client using Streamlit secrets first, fallback to .env"""
         try:
-            api_key = os.getenv("GROQ_API_KEY")
+            api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
             if not api_key:
-                logger.warning("GROQ_API_KEY environment variable not found")
+                logger.warning("GROQ_API_KEY not found in secrets or env")
                 st.warning("Groq API key not configured. AI features will be limited.")
                 return
 
-            # Initialise Groq client
             self.client = Groq(api_key=api_key)
             logger.info("Groq client initialised successfully")
         except Exception as e:

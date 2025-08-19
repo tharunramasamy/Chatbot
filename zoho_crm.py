@@ -1,6 +1,7 @@
 import requests
 import os
 import logging
+import streamlit as st
 from dotenv import load_dotenv
 from collections import defaultdict
 
@@ -8,12 +9,14 @@ from collections import defaultdict
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Load environment variables
-load_dotenv()
-client_id = os.getenv("ZOHO_CLIENT_ID")
-client_secret = os.getenv("ZOHO_CLIENT_SECRET")
-refresh_token = os.getenv("ZOHO_REFRESH_TOKEN")
-access_token = os.getenv("ZOHO_ACCESS_TOKEN")
+# Load secrets first, fallback to .env
+if not st.secrets:
+    load_dotenv()
+
+client_id = st.secrets.get("ZOHO_CLIENT_ID", os.getenv("ZOHO_CLIENT_ID"))
+client_secret = st.secrets.get("ZOHO_CLIENT_SECRET", os.getenv("ZOHO_CLIENT_SECRET"))
+refresh_token = st.secrets.get("ZOHO_REFRESH_TOKEN", os.getenv("ZOHO_REFRESH_TOKEN"))
+access_token = st.secrets.get("ZOHO_ACCESS_TOKEN", os.getenv("ZOHO_ACCESS_TOKEN"))
 BASE_URL = "https://www.zohoapis.com/crm/v2"
 
 def validate_config():

@@ -7,7 +7,10 @@ from zoho_crm import get_crm_summary, test_connection
 from google_ai import get_ai_response, get_ai_summary
 
 # ---- Configuration ----
-load_dotenv()
+# Load secrets first, then fallback to .env
+if not st.secrets:
+    load_dotenv()
+
 USERS = {
     "admin": {"password": "admin123", "role": "admin", "name": "Admin User", "owner_name": "All"},
     "RajaMurugavelu": {"password": "rajamurugavelu123", "role": "owner", "name": "Raja Murugavelu", "owner_name": "Raja Murugavelu"},
@@ -24,6 +27,7 @@ USERS = {
 }
 
 st.set_page_config(page_title="OptiAI Dashboard", layout="wide", initial_sidebar_state="expanded")
+
 
 def show_sidebar(user_info):
     st.sidebar.markdown("<h1 style='font-size:48px;color:#06b6d4;text-align:center;'>OptiAI</h1>", unsafe_allow_html=True)

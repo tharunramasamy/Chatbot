@@ -1,8 +1,8 @@
-import os
-import streamlit as st
-from groq import Groq
-import logging
-import time
+import os # This library is used for interacting with the operating system
+import streamlit as st # This library is used for building web applications
+from groq import Groq  # This library is used for interacting with Groq's AI services
+import logging # This library is used for logging messages
+import time # This library is used for adding delays in the code execution
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
